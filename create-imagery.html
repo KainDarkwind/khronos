@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>White Bear</title>
+      <link rel="stylesheet" href="style/dist.css" />
+   </head>
+   <body>
+      <div
+         class="bg-success py-4 w-100 text-center lead fixed-top d-none"
+         id="overlay-success"
+      >
+         <p><img src="icons/success.svg" width="28px" /> Card created!</p>
+      </div>
+      <div
+         class="bg-danger py-4 w-100 text-center lead fixed-top d-none"
+         id="overlay-fail"
+      >
+         <p>
+            <img src="icons/error.svg" width="28px" /> Oops! Our bad. Please try
+            again.
+         </p>
+      </div>
+
+      <div class="container">
+         <div class="row">
+            <div
+               class="col-12 col-xl-6 offset-xl-3 col-lg-8 offset-lg-2 col-md-10 offset-md-1"
+            >
+               <img src="icons/logo-app.svg" width="28px" />
+               <h3 class="d-inline text-brand">White Bear</h3>
+               <button class="btn btn-link float-right">Log Out</button>
+               <div class="clearfix"></div>
+
+               <div
+                  class="d-flex btn-group mt-1 mb-5"
+                  role="navigation"
+                  aria-label="Navigation"
+               >
+                  <a href="/create-imagery.html" class="btn btn-secondary">
+                     Create New
+                  </a>
+                  <a
+                     href="/review-answer.html"
+                     class="btn btn-secondary tab-separator"
+                  >
+                     Review
+                  </a>
+                  <a
+                     href="/all-cards.html"
+                     class="btn btn-secondary tab-separator"
+                  >
+                     All Cards
+                  </a>
+               </div>
+               <div class="mt-n4 text-center lead text-muted">
+                  <h4>Add memorable imagery</h4>
+               </div>
+               <div class="card">
+                  <div class="card-body bg-primary lead">
+                     <textarea rows="10" class="d-xs-none" autofocus></textarea>
+                     <textarea
+                        rows="6"
+                        class="d-none d-xs-block"
+                        autofocus
+                     ></textarea>
+                  </div>
+               </div>
+               <div class="card mb-5">
+                  <div class="card-body bg-secondary lead">
+                     <textarea rows="10" class="d-xs-none">
+Your answer will be here.</textarea
+                     >
+                     <textarea rows="6" class="d-none d-xs-block">
+Your answer will be here.</textarea
+                     >
+                  </div>
+               </div>
+               <div class="text-right mt-2 mb-5 text-muted">
+                  <p>Needs a real character counter here 22/240</p>
+               </div>
+               <div>
+                  <button class="btn btn-link">Back to answer</button>
+                  <div class="float-right">
+                     <button class="btn btn-primary btn-lg ml-4" id="save-card">
+                        <img
+                           src="icons\save.svg"
+                           width="20px"
+                           style="margin-bottom: 5px; margin-right: 4px"
+                        />
+                        Save
+                     </button>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <script
+         src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+         defer
+         integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
+         crossorigin="anonymous"
+      ></script>
+      <script src="/script.js" defer></script>
+   </body>
+</html>
