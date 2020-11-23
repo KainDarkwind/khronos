@@ -11371,7 +11371,7 @@ Example:
 */
 .background-image {
   /* https://css-tricks.com/perfect-full-page-background-image/ */
-  background: url("../images/background-landing.jpg") no-repeat center center fixed;
+  background: url("../images/girl-hourglass.jpg") no-repeat center center fixed;
   background-size: cover;
   min-height: 100vh;
 }

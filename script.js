@@ -11,6 +11,18 @@ $("#sign-up").click(function () {
    $("#intro-card").toggleClass("d-none");
 });
 
+$("#delete-button").click(function () {
+   $("#delete-calendar").toggleClass("d-none");
+});
+
+$("#remove-event-1").click(function () {
+   $("#list1").toggleClass("d-none");
+});
+
+$("#remove-event-2").click(function () {
+   $("#list2").toggleClass("d-none");
+});
+
 // $("#lets-go").click(function () {
 //    $("#sign-up-card").toggleClass("d-none");
 //    $("#intro-card").toggleClass("d-none");
