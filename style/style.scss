@@ -37,10 +37,10 @@ Example:
    font-weight: $font-weight-normal;
 }
 
-.card-body {
-   color: $white;
-   font-family: $font-family-serif;
-}
+// .card-body {
+//    color: $white;
+//    font-family: $font-family-serif;
+// }
 
 .card-body.bg-primary {
    border-top-left-radius: $border-radius;
@@ -112,4 +112,14 @@ h1 {
 
 .landing {
    padding: 3;
+}
+
+.cal-box {
+   min-width: 30px;
+}
+
+.cal-header {
+   @include media-breakpoint-only(xs) {
+      font-size: 8px;
+   }
 }
