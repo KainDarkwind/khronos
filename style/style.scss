@@ -116,10 +116,19 @@ h1 {
 
 .cal-box {
    min-width: 30px;
-}
+   min-height: 75px;
 
-.cal-header {
    @include media-breakpoint-only(xs) {
       font-size: 8px;
    }
+}
+.cal-header {
+   min-height: 30px;
+}
+
+.edit-banner {
+   color: $white !important;
+   position: absolute;
+   bottom: 0;
+   left: 0;
 }

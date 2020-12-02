@@ -11463,12 +11463,23 @@ h1 {
 
 .cal-box {
   min-width: 30px;
+  min-height: 75px;
 }
-
 @media (max-width: 575.98px) {
-  .cal-header {
+  .cal-box {
     font-size: 8px;
   }
+}
+
+.cal-header {
+  min-height: 30px;
+}
+
+.edit-banner {
+  color: #fff !important;
+  position: absolute;
+  bottom: 0;
+  left: 0;
 }
 
 /*# sourceMappingURL=dist.css.map */
