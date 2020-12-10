@@ -39,17 +39,28 @@
                                  Let's get you signed up.
                               </p>
                               <p class="mt-6">Email address</p>
-                              <input class="form-control" type="text" />
+                              <input
+                                 class="form-control"
+                                 id="sign-up-email"
+                                 type="text"
+                              />
+                              <div class="text-danger" id="email-warning"></div>
                               <p>Password</p>
-                              <input class="form-control" type="text" />
-
-                              <a
-                                 href="/calendars.html"
-                                 class="btn mt-5 landing-button btn-primary btn-block"
+                              <input
+                                 class="form-control"
+                                 id="sign-up-password"
+                                 type="password"
+                              />
+                              <div
+                                 class="text-danger"
+                                 id="password-warning"
+                              ></div>
+                              <button
+                                 class="btn mt-5 landing-button btn-success btn-block"
                                  id="lets-go"
                               >
                                  Let's go!
-                              </a>
+                              </button>
                            </div>
                         </div>
                      </div>

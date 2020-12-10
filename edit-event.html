@@ -37,7 +37,7 @@
                   </h4>
                </div>
 
-               <div>
+               <div class="mb-5">
                   <div class="float-right">
                      <img src="icons/edit.svg" width="14px" />Edit
                   </div>
@@ -50,20 +50,24 @@
                   <input
                      type="text"
                      class="mt-2 form-control"
+                     id="add-new-event"
                      placeholder="Add new event"
                   />
+                  <div class="text-muted float-right">
+                     <p><span id="edit-event-char-count">0</span>/240</p>
+                  </div>
                </div>
 
-               <div class="my-3 d-inline">
+               <div class="mt-5 d-inline">
                   <a href="/view-calendar.html" class="btn btn-outline"
                      >Cancel</a
                   >
                </div>
-               <div class="my-3 d-inline float-right">
+               <div class="mt-5 d-inline float-right">
                   <a
                      href="/view-calendar.html"
                      class="btn btn-primary"
-                     id="save-calendar-new"
+                     id="save-event"
                   >
                      <img
                         src="icons\save.svg"
