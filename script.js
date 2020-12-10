@@ -263,6 +263,33 @@ $("#cal-box-10-3").hover(function () {
    $("#cal-banner-10-3").toggleClass("d-none");
 });
 
+$("#add-weekday2").click(function () {
+   $("#weekday2").toggleClass("d-none");
+   $("#add-weekday3").removeClass("d-none");
+   $("#add-weekday2").addClass("d-none");
+});
+
+$("#add-weekday3").click(function () {
+   $("#weekday3").toggleClass("d-none");
+   $("#add-weekday4").removeClass("d-none");
+   $("#add-weekday3").addClass("d-none");
+});
+
+$("#add-weekday4").click(function () {
+   $("#weekday4").toggleClass("d-none");
+});
+
+// let createAnswerInputCharsCount = 0;
+// $("#create-answer-input").keypress(function () {
+//    createAnswerInputCharsCount += 1;
+
+//    const maxChars = 240;
+//    console.log("add it", createAnswerInputCharsCount);
+//    $("#create-answer-char-count").html(createAnswerInputCharsCount);
+// });
+
+// Going to be a character counter once feedback video viewed
+
 // $("#lets-go").click(function () {
 //    $("#sign-up-card").toggleClass("d-none");
 //    $("#intro-card").toggleClass("d-none");

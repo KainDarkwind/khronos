@@ -19,15 +19,13 @@
 
       <div class="container">
          <div class="row">
-            <div
-               class="col-12 col-xl-6 offset-xl-3 col-lg-8 offset-lg-2 col-md-10 offset-md-1"
-            >
-            <a href="/index.html">
-               <img
-                  src="icons/icon-hour-glass.svg"
-                  width="16px"
-                  class="mt-n1"
-            /></a>
+            <div class="col-12">
+               <a href="/calendars.html">
+                  <img
+                     src="icons/icon-hour-glass.svg"
+                     width="16px"
+                     class="mt-n1"
+               /></a>
                <h3 class="d-inline text-brand">Khronos</h3>
                <a href="/index.html" class="btn btn-link float-right"
                   >Log Out</a
@@ -39,42 +37,46 @@
                   </h4>
                </div>
 
-               <div class="card" style="width: 100%;">
-                  <div class="card-header">
-                    Events
+               <div>
+                  <div class="float-right">
+                     <img src="icons/edit.svg" width="14px" />Edit
                   </div>
-                  <ul class="list-group list-group-flush">
-                    <li class="list-group-item" id="list1">Party arrives at Rivendell <img src="icons/error.svg" width="20px" class="float-right" id="remove-event-1"
-                     /></li>
-                    <li class="list-group-item" id="list2">Party defeats Rag Man<img src="icons/error.svg" width="20px" class="float-right" id="remove-event-2"
-                     /></li>
-                    <li class="list-group-item"><input placeholder="Add new event"><img src="icons/success.svg" width="20px" class="float-right" id="add-event-3"
-                     /></li>
-                  </ul>
-                </div>
+                  <p>Party arrives at Rivendell.</p>
+                  <div class="float-right">
+                     <img src="icons/edit.svg" width="14px" />Edit
+                  </div>
+                  <p>Party defeats Rag Man.</p>
 
-                <div class="my-4"><div class="d-inline"><a href="/view-calendar.html" class="btn btn-primary"
-                >Cancel</a
-             ></div>
-                  <div class="d-inline float-right">
-                     <a
-                        href="/view-calendar.html"
-                        class="btn btn-primary"
-                        id="save-calendar-new"
-                     >
-                        <img
-                           src="icons\save.svg"
-                           width="20px"
-                           style="margin-bottom: 5px; margin-right: 4px"
-                        />
-                        Save and return to calendar
-                     </a>
-                  </div></div>
-                 
+                  <input
+                     type="text"
+                     class="mt-2 form-control"
+                     placeholder="Add new event"
+                  />
+               </div>
+
+               <div class="my-3 d-inline">
+                  <a href="/view-calendar.html" class="btn btn-outline"
+                     >Cancel</a
+                  >
+               </div>
+               <div class="my-3 d-inline float-right">
+                  <a
+                     href="/view-calendar.html"
+                     class="btn btn-primary"
+                     id="save-calendar-new"
+                  >
+                     <img
+                        src="icons\save.svg"
+                        width="20px"
+                        style="margin-bottom: 5px; margin-right: 4px"
+                     />
+                     Save and return to calendar
+                  </a>
                </div>
             </div>
          </div>
       </div>
+
       <script
          src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
          defer
