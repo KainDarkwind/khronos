@@ -41,19 +41,22 @@
                               <p class="mt-6">Email address</p>
                               <input
                                  class="form-control"
-                                 id="sign-up-email"
+                                 id="sign-up-email-input"
                                  type="text"
                               />
-                              <div class="text-danger" id="email-warning"></div>
+                              <div
+                                 class="text-danger"
+                                 id="sign-up-email-input-error"
+                              ></div>
                               <p>Password</p>
                               <input
                                  class="form-control"
-                                 id="sign-up-password"
+                                 id="sign-up-password-input"
                                  type="password"
                               />
                               <div
                                  class="text-danger"
-                                 id="password-warning"
+                                 id="sign-up-password-error"
                               ></div>
                               <button
                                  class="btn mt-5 landing-button btn-success btn-block"
@@ -99,6 +102,8 @@
       ></script>
       <script src="/secondMostInsecurePasswords.js" defer></script>
       <script src="/mostInsecurePasswords.js" defer></script>
+      <script src="/showEmailError.js" defer></script>
+      <script src="/showPasswordError.js" defer></script>
       <script src="/script.js" defer></script>
    </body>
 </html>

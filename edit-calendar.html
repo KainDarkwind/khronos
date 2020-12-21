@@ -19,7 +19,7 @@
 
       <div class="container">
          <div class="row">
-            <div class="col-12">
+            <div class="col-10">
                <a href="/calendars.html">
                   <img
                      src="icons/icon-hour-glass.svg"
@@ -47,12 +47,12 @@
 
       <div class="container">
          <div class="row">
-            <div class="font-weight-bold col-5 d-inline">Campaign Name</div>
-            <div class="col-7 d-inline">
+            <div class="font-weight-bold col-4 d-inline">Campaign Name</div>
+            <div class="col-6 d-inline">
                <input type="text" class="form-control" id="new-campaign-name" />
             </div>
-            <div class="font-weight-bold col-5 d-inline">Year Number</div>
-            <div class="col-7 d-inline">
+            <div class="font-weight-bold col-4 d-inline">Year Number</div>
+            <div class="col-6 d-inline">
                <input
                   type="text"
                   class="form-control"
@@ -60,8 +60,8 @@
                />
             </div>
 
-            <div class="font-weight-bold col-5 d-inline">Year Name</div>
-            <div class="col-7 d-inline">
+            <div class="font-weight-bold col-4 d-inline">Year Name</div>
+            <div class="col-6 d-inline">
                <input
                   type="text"
                   class="form-control"
@@ -73,81 +73,27 @@
 
       <div class="container">
          <div class="row">
-            <div class="font-weight-bold col-5">Add weekday:</div>
-            <div class="col-7">
-               <input
-                  type="text"
-                  class="form-control d-inline"
+            <div class="font-weight-bold col-4">Name weekdays:</div>
+            <div class="col-6">
+               <textarea
+                  class="form-control"
                   id="new-campaign-weekday1"
-               />
+               ></textarea>
             </div>
          </div>
       </div>
 
-      <div class="d-none container" id="weekday2">
-         <div class="row">
-            <div class="font-weight-bold col-5">Another weekday?</div>
-            <div class="col-7">
-               <input
-                  type="text"
-                  class="form-control d-inline"
-                  id="new-campaign-weekday2"
-               />
-            </div>
-         </div>
-      </div>
-
-      <div class="d-none container" id="weekday3">
-         <div class="row">
-            <div class="font-weight-bold col-5">Another weekday?</div>
-            <div class="col-7">
-               <input
-                  type="text"
-                  class="form-control d-inline"
-                  id="new-campaign-weekday3"
-               />
-            </div>
-         </div>
-      </div>
-      <div class="d-none container" id="weekday4">
-         <div class="row">
-            <div class="font-weight-bold col-5">Another weekday?</div>
-            <div class="col-7">
-               <input
-                  type="text"
-                  class="form-control d-inline"
-                  id="new-campaign-weekday4"
-               />
-            </div>
-         </div>
-      </div>
-
-      <div class="offset-5 col-7">
-         <img
-            src="icons/icon-add.svg"
-            class="float-right"
-            width="32px"
-            id="add-weekday2"
-         />
-      </div>
-      <div class="d-none offset-5 col-7" id="add-weekday3">
-         <img src="icons/icon-add.svg" class="float-right" width="32px" />
-      </div>
-      <div class="d-none offset-5 col-7" id="add-weekday4">
-         <img src="icons/icon-add.svg" class="float-right" width="32px" />
-      </div>
-
-      <div class="container">
+      <div class="container mt-8">
          <hr />
          <div class="row">
-            <div class="font-weight-bold col-5">January</div>
+            <div class="font-weight-bold col-5 my-4">January</div>
             <div class="col-2">31</div>
-            <div class="col-5">Standard</div>
-            <div class="font-weight-bold col-5">Holy Month</div>
+            <div class="col-4">Standard</div>
+            <div class="font-weight-bold col-5 my-4">Holy Month</div>
             <div class="col-2">1</div>
-            <div class="col-5">Intercalary</div>
+            <div class="col-4">Intercalary</div>
 
-            <div class="col-5 form-group">
+            <div class="col-4 form-group my-4">
                <input
                   type="text"
                   class="input-sm form-control"
@@ -155,7 +101,7 @@
                   placeholder="New month name"
                />
             </div>
-            <div class="col-2 form-group">
+            <div class="col-2 form-group my-4">
                <input
                   type="text"
                   class="input-sm form-control"
@@ -163,7 +109,7 @@
                   placeholder="# of days"
                />
             </div>
-            <div class="col-5 form-group">
+            <div class="col-4 form-group my-4">
                <select class="form-control" id="calendar-type">
                   <option>Standard</option>
                   <option>Intercalary</option>
@@ -174,19 +120,16 @@
 
       <div class="container">
          <div class="row">
-            <div class="col-5 checkbox" id="delete-button">
+            <div class="col-4 checkbox" id="delete-button">
                <label
                   ><input type="checkbox" value="" />Show Delete Button</label
                ><br />
-               <div class="btn btn-danger d-none" id="delete-calendar">
-                  Delete Calendar
-               </div>
             </div>
 
-            <div class="col-7 mb-2">
+            <div class="col-6 mb-2">
                <a
                   href="/calendars.html"
-                  class="btn btn-primary float-right"
+                  class="btn btn-primary float-right d-inline"
                   id="save-calendar-new"
                >
                   <img
@@ -196,6 +139,12 @@
                   />
                   Save and view calendar
                </a>
+               <p
+                  class="btn btn-danger d-none float-right mb-2 mx-5"
+                  id="delete-calendar"
+               >
+                  Delete Calendar
+               </p>
             </div>
          </div>
       </div>
