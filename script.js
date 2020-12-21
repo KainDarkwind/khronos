@@ -344,25 +344,6 @@ $("#lets-go").click(function (e) {
    const createdAt =
       formattedYear + padLeft(formattedMonth) + padLeft(formattedDay);
    console.log(`Created at`, createdAt);
-   //Possible options.  2 digit month, 2 digit day.  All good.
-   // 1 digit month, 2 digit day.  Pad month
-   // 2 digit month, 1 digit day.  Pad day.
-   // 1 digit month, 1 digit day.  Pad both.
-
-   // if (formattedMonth.length !== 2 && formattedDay.length !== 2) {
-   //    const createdAt =
-   //       formattedYear + padding + formattedMonth + padding + formattedDay;
-   //    console.log(`Created at`, createdAt);
-   // } else if (formattedMonth.length !== 2) {
-   //    const createdAt = formattedYear + padding + formattedMonth + formattedDay;
-   //    console.log(`Created at`, createdAt);
-   // } else if (formattedDay.length !== 2) {
-   //    const createdAt = formattedYear + formattedMonth + padding + formattedDay;
-   //    console.log(`Created at`, createdAt);
-   // } else {
-   //    const createdAt = formattedYear + formattedMonth + formattedDay;
-   //    console.log(`Created at`, createdAt);
-   // }
 
    showEmailError();
    showPasswordError();
