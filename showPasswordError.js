@@ -22,6 +22,39 @@ function showPasswordError() {
    console.log(`password input: ${passwordInput}`);
    emailToSearchFor = "localEmail";
 
+   const clickedAt = new Date(Date.now());
+   const year = clickedAt.getFullYear();
+   const month = clickedAt.getMonth();
+   const day = clickedAt.getDate();
+
+   // const hour = clickedAt.getHours();
+   // const minutes = clickedAt.getMinutes();
+   // const seconds = clickedAt.getSeconds();
+   const milliseconds = clickedAt.getMilliseconds();
+
+   const formattedYear = String(year);
+   const formattedMonth = String(month + 1);
+   let formattedDay = String(day);
+   let formattedMilliseconds = String(milliseconds);
+   // formattedDay = `9`; //uncomment for testing purposes
+
+   const createdAt =
+      formattedYear +
+      padLeft(formattedMonth, 2, "0") +
+      padLeft(formattedDay, 2, "0");
+   console.log(`Created at`, createdAt);
+
+   const randomIdInt = getRandomInt(0, 999);
+   const formattedRandomIdInt = String(randomIdInt);
+
+   const id =
+      padLeft(formattedRandomIdInt, 3, "0") +
+      padLeft(formattedMilliseconds, 3, "0");
+
+   //if EmailError or PasswordError do not trigger, then create userProps.  Can I create a condition within those errors on a success that the if statement here checks for?
+
+   const userProps = [normalizedEmailInput, passwordInput, createdAt, id];
+
    // console log 'unacceptablePasswords'
    // this is made by concating most and secondMostInsecure passwords.
    //Remove obama2016 and skywalker
@@ -119,8 +152,6 @@ function showPasswordError() {
       unacceptablePasswords = penultimateList.concat(normalizedBadPasswords); //reversed and regular arrays joined into a single one.
    }
 
-   console.log(`These are unacceptable passwords:`, unacceptablePasswords);
-
    if (passwordLength === 0) {
       console.log("no password entered");
       //remove d-none from #no-sign-up-email-input-error  add class 'is-invalid' to #sign-up-email-input
@@ -143,6 +174,7 @@ function showPasswordError() {
       );
    } else if (unacceptablePasswords.includes(passwordInput)) {
       console.log("password contains insecure password");
+      console.log(`These are unacceptable passwords:`, unacceptablePasswords);
       $("#sign-up-password-error").removeClass("d-none");
       $("#sign-up-password-input").addClass("is-invalid");
       $("#sign-up-password-error").html(
@@ -150,6 +182,10 @@ function showPasswordError() {
       );
    } else if (passwordLength > 8) {
       console.log("just right password");
+      console.log(`The random number was`, randomIdInt);
+      console.log(`The milliseconds were`, milliseconds);
+      console.log(`Your id is`, id);
+      console.log("Userprops are", userProps);
       $("#sign-up-password-error").addClass("d-none");
       $("#sign-up-password-input").removeClass("is-invalid");
    }
