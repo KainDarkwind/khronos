@@ -23,7 +23,7 @@ function showEmailError() {
       $("#sign-up-email-input-error").html("Please enter your email.");
       $("#sign-up-email-input").addClass("is-invalid");
    } else {
-      console.log("email just right");
+      console.log(`Nice to meet you, "${normalizedEmailInput}"`);
       $("#sign-up-email-input-error").addClass("d-none");
       $("#sign-up-email-input").removeClass("is-invalid");
    }

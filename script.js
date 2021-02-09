@@ -334,27 +334,79 @@ $("#lets-go").click(function (e) {
    // const hour = clickedAt.getHours();
    // const minutes = clickedAt.getMinutes();
    // const seconds = clickedAt.getSeconds();
-   // const milliseconds = clickedAt.getMilliseconds();
+   const milliseconds = clickedAt.getMilliseconds();
 
    const formattedYear = String(year);
    const formattedMonth = String(month + 1);
    let formattedDay = String(day);
+   let formattedMilliseconds = String(milliseconds);
    // formattedDay = `9`; //uncomment for testing purposes
 
    const createdAt =
-      formattedYear + padLeft(formattedMonth) + padLeft(formattedDay);
+      formattedYear +
+      padLeft(formattedMonth, 2, "0") +
+      padLeft(formattedDay, 2, "0");
    console.log(`Created at`, createdAt);
+
+   const randomIdInt = getRandomInt(0, 999);
+   const formattedRandomIdInt = String(randomIdInt);
+
+   const id =
+      padLeft(formattedRandomIdInt, 3, "0") +
+      padLeft(formattedMilliseconds, 3, "0");
+
+   console.log(`The random number was`, randomIdInt);
+   console.log(`The milliseconds were`, milliseconds);
+   console.log(`Your id is`, id);
 
    showEmailError();
    showPasswordError();
+
+   const emailInput = $("#sign-up-email-input").val();
+   const trimmedEmailInput = emailInput.trim();
+   const normalizedEmailInput = trimmedEmailInput.toLowerCase();
+
+   const passwordTyped = $("#sign-up-password-input").val();
+   const stringPassword = String(passwordTyped);
+   const passwordInput = stringPassword.toLowerCase();
+
+   //if EmailError or PasswordError do not trigger, then create userProps.  Can I create a condition within those errors on a success that the if statement here checks for?
+
+   const userProps = [normalizedEmailInput, passwordInput, createdAt, id];
+   console.log("Userprops are", userProps);
    //check if password empty
 });
 
-function padLeft(str) {
-   const padding = `0`;
-   if (str.length === 1) {
-      return padding + str;
-   } else {
-      return str;
+//TODO:  showPasswordError > const passwordError = getPasswordError(password, email);, showEmailError > getEmailError()
+// showError(element, errorMessage), will work for both email and password
+
+// function padLeft(str) {
+//    const padding = `0`;
+//    if (str.length === 1) {
+//       return padding + str;
+//    } else {
+//       return str;
+//    }
+// }
+
+function padLeft(num, width, char) {
+   const numAsStr = String(num);
+   let padding = "";
+   for (let i = 0; i < width; i++) {
+      padding += char;
    }
+
+   const concattedStr = padding + numAsStr;
+
+   if (numAsStr.length >= width) {
+      return numAsStr;
+   }
+   const slicedStr = concattedStr.slice(-width);
+   return slicedStr;
+}
+
+function getRandomInt(min, max) {
+   min = Math.ceil(min);
+   max = Math.floor(max);
+   return Math.floor(Math.random() * (max + 1 - min) + min); //max is normally exclusive, min is inclusive, so +1 allows you to include the max.
 }
