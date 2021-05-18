@@ -326,8 +326,8 @@ $("#lets-go").click(function (e) {
 
    //check if email empty
 
-   showEmailError();
-   showPasswordError();
+   getEmailError();
+   getPasswordError();
 
    //check if password empty
 });
