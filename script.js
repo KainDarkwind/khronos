@@ -322,36 +322,87 @@ $("#add-new-event").keyup(function (e) {
 });
 
 $("#lets-go").click(function (e) {
-   const emailInputLength = $("#sign-up-email-input").val().length;
    const emailInput = $("#sign-up-email-input").val();
+   const email = emailInput.trim().toLowerCase();
+   const password = $("#sign-up-password-input").val();
 
-   console.log("The email entered is:", emailInput);
+   const emailError = getEmailError(email);
 
-   //const trimmedEmail = emailInput.trim();
-   //   const lowerCasedEmail = trimmedEmail.toLowerCase();
+   const user = {
+      email: email,
+      password: password,
+      createdAt: getCreatedAt(),
+      id: getId(),
+      emailTld: getTld(email),
+      socialProfiles: [
+         {
+            site: "facebook",
+            siteId: "530c2716-36e2-4a80-93b7-0e8483d629e1",
+            username: "",
+            image: {
+               sm: "",
+               orig: "",
+            },
+         },
+         {
+            site: "twitter",
+            siteId: "79023b4d-57a2-406b-8efe-bda47fb1696c",
+            username: "",
+            image: {
+               sm: "",
+               md: "",
+               orig: "",
+            },
+         },
+      ],
+   };
 
-   if (emailInputLength === 0) {
-      console.log("There is no email text entered.");
-      $("#sign-up-email-input-error").html("Please enter your email address.");
-      $("#sign-up-email-input").addClass("is-invalid");
+   const activeUser = deepCopy(user);
+   activeUser.isActive = true;
+   activeUser.createdAt = getEpochMs(user.createdAt);
+   removeSmAndMdImages(activeUser.socialProfiles);
+
+   if (emailError !== "") {
+      const element = "#sign-up-email";
+      const errorMessage = emailError;
+      showErrorMessage(element, errorMessage);
    } else {
-      console.log("The email is just right.");
-      $("#sign-up-email-input-error").html("");
-      $("#sign-up-email-input").removeClass("is-invalid");
+      const element = "#sign-up-email";
+      const errorMessage = emailError;
+      hideErrorMessage(element, errorMessage);
+      //Else hide any error messages/styling.
    }
+
+   const passwordError = getPasswordError(password, email);
+
+   if (passwordError !== "") {
+      const element = "#sign-up-password";
+      const errorMessage = passwordError;
+      showErrorMessage(element, errorMessage);
+   } else {
+      const element = "#sign-up-password";
+      const errorMessage = passwordError;
+      hideErrorMessage(element, errorMessage);
+      //Else hide any error messages/styling.
+      console.log("The user is", user);
+      console.log("The active user is", activeUser);
+   }
+   //If password error is not "",
 });
 
-$("#lets-go").click(function (e) {
-   const passwordInputLength = $("#sign-up-password-input").val().length;
-   const passwordInput = $("#sign-up-password-input").val();
-   const emailInput = $("#sign-up-email-input").val();
+function showErrorMessage(element, errorMessage) {
+   //style and show error message.
+   $(`${element}-input`).addClass("is-invalid");
+   $(`${element}-error`).html(errorMessage);
+}
 
-   console.log("The email entered is:", emailInput);
+function hideErrorMessage(element, errorMessage) {
+   //Else hide any error messages/styling.
+   $(`${element}-input`).removeClass("is-invalid");
+   $(`${element}-error`).html(errorMessage);
+}
 
-   const trimmedEmail = emailInput.trim();
-   const lowerCasedEmail = trimmedEmail.toLowerCase();
-   const normalizedPassword = passwordInput.toLowerCase().trim();
-
+function getCreatedAt() {
    const clickedAt = new Date(Date.now()); //This produces a date at the very moment the function runs.
    const year = clickedAt.getFullYear();
    const month = clickedAt.getMonth();
@@ -360,207 +411,117 @@ $("#lets-go").click(function (e) {
    let formattedMonth = String(month + 1);
    let formattedDay = String(day);
 
+   //If the formatted length is less than 2, we will concat a 0 to the left of the string.  Else we leave it.
+
    if (formattedMonth.length < 2) {
-      formattedMonth = "0" + formattedMonth;
+      console.log("The month needs padding");
+      //formattedMonth = "0" + formattedMonth;
+      formattedMonth = padLeft(formattedMonth, 2, "0");
    }
+
    if (formattedDay.length < 2) {
-      formattedDay = "0" + formattedDay;
-   }
-   const formattedDate = formattedYear + formattedMonth + formattedDay;
-   const createdAt = Number(formattedDate);
-   console.log("created at", createdAt);
-
-   /* Commented out to replace with split method.
-   const delimiter = `@`;
-   const indexOfLocalEmail = lowerCasedEmail.indexOf(delimiter);
-   console.log(`The index of local email is ${indexOfLocalEmail}.`);
-   const localEmail = lowerCasedEmail.slice(0, indexOfLocalEmail);
-   console.log(`The value of local email is ${localEmail}.`);*/
-
-   const listOfEmailParts = lowerCasedEmail.split("@");
-   // Split removes the item it is searching for, and places the other pieces into an array.  An empty string "" will return a split up list of each individual character.
-
-   //console.log(listOfEmailParts);
-   const localEmail = listOfEmailParts[0];
-
-   const newMostInsecurePasswords = [...mostInsecurePasswords];
-   const flatSecondMostInsecurePasswords = secondMostInsecurePasswords.flat();
-   const initialUnacceptablePasswords = [
-      ...newMostInsecurePasswords,
-      ...flatSecondMostInsecurePasswords,
-   ];
-
-   //Right here I removed all of the duplicate passwords with Set.
-   const uniqueUnacceptablePasswords = [
-      ...new Set(initialUnacceptablePasswords),
-   ];
-
-   const firstRemainingUnacceptablePasswords =
-      uniqueUnacceptablePasswords.slice(
-         0,
-         uniqueUnacceptablePasswords.indexOf("skywalker")
-      );
-
-   const secondRemainingUnacceptablePasswords =
-      uniqueUnacceptablePasswords.slice(
-         uniqueUnacceptablePasswords.indexOf("skywalker") + 1
-      );
-
-   const skywalkerlessUnacceptablePasswords = [
-      ...firstRemainingUnacceptablePasswords,
-      ...secondRemainingUnacceptablePasswords,
-   ];
-
-   const firstObamalessUnacceptablePasswords =
-      skywalkerlessUnacceptablePasswords.slice(
-         0,
-         skywalkerlessUnacceptablePasswords.indexOf("obama2016")
-      );
-
-   const secondObamalessUnacceptablePasswords =
-      skywalkerlessUnacceptablePasswords.slice(
-         skywalkerlessUnacceptablePasswords.indexOf("obama2016") + 1
-      );
-
-   const cleanedUnacceptablePasswords = [
-      ...firstObamalessUnacceptablePasswords,
-      ...secondObamalessUnacceptablePasswords,
-   ];
-
-   let booleanFreeUnacceptablePasswords = [];
-   for (let i = 0; i < cleanedUnacceptablePasswords.length; i++) {
-      const passwordInQuestion = cleanedUnacceptablePasswords[i];
-
-      if (typeof passwordInQuestion !== "boolean") {
-         booleanFreeUnacceptablePasswords =
-            booleanFreeUnacceptablePasswords.concat([
-               cleanedUnacceptablePasswords[i],
-            ]);
-         //if the password is not a boolean (true/false), we are sticking it into the array.
-      } else {
-         //else, skip boolean value
-      }
-   }
-   let monoDataTypeUnacceptablePasswords = [];
-   for (let i = 0; i < booleanFreeUnacceptablePasswords.length; i++) {
-      const passwordInQuestion = booleanFreeUnacceptablePasswords[i];
-
-      if (typeof passwordInQuestion === "number") {
-         const stringPassword = String(passwordInQuestion);
-         monoDataTypeUnacceptablePasswords =
-            monoDataTypeUnacceptablePasswords.concat([stringPassword]);
-         //If the password is a number, we turn it to a string and put it into the array.
-      } else {
-         monoDataTypeUnacceptablePasswords =
-            monoDataTypeUnacceptablePasswords.concat([
-               booleanFreeUnacceptablePasswords[i],
-            ]);
-         //If the password isn't a number, we leave it alone but put it into the array.
-      }
+      console.log("The day needs padding");
+      //formattedDay = 0 + formattedDay;
+      formattedDay = padLeft(formattedMonth, 2, "0");
    }
 
-   //Use a for loop to reverse every string in your list and add them to a new list. Your list should contain both the forward and reverse versions of each password.
+   return formattedYear + formattedMonth + formattedDay;
+}
 
-   //we run a for loop to go through the password list.
-   let unacceptableAndReversedPasswords = [];
-   for (let i = 0; i < monoDataTypeUnacceptablePasswords.length; i++) {
-      const passwordInQuestion = monoDataTypeUnacceptablePasswords[i];
-      //console.log("password in question is", passwordInQuestion);
+function getId() {
+   const randomInt = getRandomInt(1, 999);
+   const paddedInt = padLeft(randomInt, 3, "0");
+   const createdAt = new Date(Date.now());
+   const milliseconds = createdAt.getMilliseconds();
+   const formattedMilliseconds = String(milliseconds);
+   const paddedMilliseconds = padLeft(formattedMilliseconds, 3, "0");
+   return paddedInt + paddedMilliseconds;
+}
 
-      //For each item in the array, we are going to split it with a blank string "".  This will give us the item in an array of its parts, aka letters.
-
-      const passwordLetters = passwordInQuestion.split("");
-      //console.log("split password is", passwordLetters);
-
-      /*for (let i = 0; i < listOfPasswords.length; i++) {
-      const passwordInQuestion = listOfPasswords[i];
-      const splitPassword = passwordInQuestion.split("");
-      console.log("list of passwords is", listOfPasswords);
-      console.log("password in question is", passwordInQuestion);
-      console.log("split password is", splitPassword);
-   }*/
-      //We will then make a copy of that array of parts with the spread ... operator.  We want to keep the original list intact.
-
-      const copyOfPasswordLetters = [...passwordLetters];
-      //console.log("copy of password letters is", copyOfPasswordLetters);
-      //We will then reverse the order of that array of parts with the .reverse() method.
-
-      const reversedPasswordLetters = copyOfPasswordLetters.reverse();
-      //console.log("reversed password letters are", reversedPasswordLetters);
-      //We will then put that reversed order back together with the .join("") method.
-
-      const reversedPasswords = reversedPasswordLetters.join("");
-      // console.log("rejoined reversed passwords are", reversedPasswords);
-      //We will then add that reversed string to the true final array.
-
-      unacceptableAndReversedPasswords =
-         unacceptableAndReversedPasswords.concat([
-            monoDataTypeUnacceptablePasswords[i],
-            reversedPasswords,
-         ]);
+function padLeft(num, width, char) {
+   const numAsStr = String(num);
+   let padding = "";
+   for (let i = 0; i < width; i++) {
+      padding += char;
    }
+   console.log("Padding is", padding);
 
-   //Use a for loop to lowercase every string in your list.
+   const concattedStr = padding + numAsStr;
 
-   //we run a for loop to go through the password list.
-
-   let unacceptableAndFormattedPasswords = [];
-   for (let i = 0; i < unacceptableAndReversedPasswords.length; i++) {
-      const passwordInQuestion = unacceptableAndReversedPasswords[i];
-      //console.log("password in question is", passwordInQuestion);
-
-      //For each item in the array, we are going to lowercase it with the .tolowercase and trim white space with the .trim
-      const formattedPasswords = passwordInQuestion.toLowerCase().trim();
-
-      //We will then add that reversed string to the true final array.
-      unacceptableAndFormattedPasswords =
-         unacceptableAndFormattedPasswords.concat([formattedPasswords]);
+   if (numAsStr.length >= width) {
+      return numAsStr;
    }
+   const slicedStr = concattedStr.slice(-width);
+   return slicedStr;
+}
 
-   //Running set to remove any crafty palindrome passwords from the final list.
-   const unacceptablePasswords = [
-      ...new Set(unacceptableAndFormattedPasswords),
-   ];
+function getRandomInt(min, max) {
+   min = Math.ceil(min);
+   max = Math.floor(max);
+   return Math.floor(Math.random() * (max + 1 - min) + min); //max is normally exclusive, min is inclusive, so +1 allows you to include the max.
+}
 
-   if (passwordInputLength === 0) {
-      console.log("There is no password text entered.");
-      $("#sign-up-password-error").html("Please create a password.");
-      $("#sign-up-password-error-addendum").html(
-         "Must be at least 9 characters."
-      );
-      $("#sign-up-password-input").addClass("is-invalid");
-   } else if (passwordInputLength < 9) {
-      console.log("The password is too short.");
-      $("#sign-up-password-error").html(
-         "Your password must be at least 9 characters."
-      );
-      $("#sign-up-password-error-addendum").html("");
-      $("#sign-up-password-input").addClass("is-invalid");
-   } else if (passwordInput.includes(localEmail) && localEmail.length >= 4) {
-      console.log("The password cannot match email.");
-      $("#sign-up-password-error").html(
-         "All or part of your email address cannot be used in your password."
-      );
-      $("#sign-up-password-error-addendum").html("");
-      $("#sign-up-password-input").addClass("is-invalid");
-   } else if (unacceptablePasswords.includes(normalizedPassword)) {
-      console.log("The password cannot be lame.");
-      $("#sign-up-password-error").html(
-         `Your password contains a commonly used password, "${passwordInput}" and can be easily discovered by attackers. Please use something else.`
-      );
-      $("#sign-up-password-error-addendum").html("");
-      $("#sign-up-password-input").addClass("is-invalid");
-      console.log(
-         "This is the final list of unacceptable passwords:",
-         unacceptablePasswords
-      );
+function getTld(email) {
+   const listOfEmailParts = email.split("@");
+   const domainEmail = listOfEmailParts[1];
+
+   if (domainEmail === undefined) {
+      return "";
    } else {
-      console.log("The password is just right.");
-      console.log("The user's email is", lowerCasedEmail);
-      console.log(createdAt);
+      const listOfDomainParts = domainEmail.split(".");
 
-      $("#sign-up-password-error").html("");
-      $("#sign-up-password-error-addendum").html("");
-      $("#sign-up-password-input").removeClass("is-invalid");
+      if (listOfDomainParts === undefined) {
+         return "";
+      } else {
+         return listOfDomainParts[1];
+      }
    }
-});
+}
+
+function deepCopy(obj) {
+   const str = JSON.stringify(obj);
+
+   return safelyParseJson(str);
+}
+
+function safelyParseJson(str) {
+   try {
+      JSON.parse(str);
+   } catch {
+      return str;
+   }
+   return JSON.parse(str);
+}
+
+function getEpochMs(value) {
+   //This function breaks a date in YYYYMMDD format into one in milliseconds past the epoch.
+   const originalDate = value.toString();
+   const formattedYear = originalDate.slice(0, 4);
+   const formattedMonth = originalDate.slice(4, 6) - 1;
+   const formattedDay = originalDate.slice(6);
+   const formattedDate = new Date(formattedYear, formattedMonth, formattedDay);
+   const epochMs = formattedDate.getTime();
+
+   return epochMs;
+}
+
+function removeSmAndMdImages(socialProfiles) {
+   for (let i = 0; i < socialProfiles.length; i++) {
+      const profile = socialProfiles[i];
+      //const hasImageProp = profile.hasOwnProperty("image");
+      const images = profile.image;
+      const hasSmProp = images.hasOwnProperty("sm");
+      const hasMdProp = images.hasOwnProperty("md");
+
+      if (hasSmProp === true) {
+         // if this profile has sm property, remove sm property
+         delete images.sm;
+      }
+
+      if (hasMdProp === true) {
+         // if this profile has md property, remove md property
+         delete images.md;
+      }
+   }
+   return socialProfiles;
+}
