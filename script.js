@@ -357,10 +357,68 @@ $("#lets-go").click(function (e) {
       ],
    };
 
+   let mostRecentSignUpDate = 0;
+
+   dbUsers.forEach((user) => {
+      if (user.createdAt > mostRecentSignUpDate) {
+         mostRecentSignUpDate = user.createdAt;
+      }
+   });
+
+   console.log("the most recent sign up date is", mostRecentSignUpDate);
+
+   const mostRecentSignUp = dbUsers.find((user) => {
+      return user.createdAt === mostRecentSignUpDate;
+   });
+
+   console.log("most recent sign up guy is", mostRecentSignUp);
+
+   const dupUserIndex = dbUsers
+      .map((user) => {
+         return user.id;
+      })
+      .findIndex((id, i, arr) => {
+         return arr.indexOf(id) !== i;
+      });
+
+   const uniqDbUsers = dbUsers.filter((user) => {
+      return dbUsers.indexOf(user) != dupUserIndex;
+   });
+
+   console.log("the unique DB Users are", uniqDbUsers);
+
    const activeUser = deepCopy(user);
    activeUser.isActive = true;
    activeUser.createdAt = getEpochMs(user.createdAt);
-   removeSmAndMdImages(activeUser.socialProfiles);
+
+   activeUser.socialProfiles.forEach((socialProfile) => {
+      if (socialProfile.image.hasOwnProperty("sm")) {
+         delete socialProfile.image.sm;
+      }
+      if (socialProfile.image.hasOwnProperty("md")) {
+         delete socialProfile.image.md;
+      }
+   });
+
+   const users = [user, activeUser];
+   const currentUsers = users
+      .map((user) => {
+         //Now map over each of the 2 objects in users to create a new array where each object in the array has the same 5 properties: id, email, password, createdAt, and isActive. The values for each object should be the values they previously had. Note: if an object did not previously have an isActive property, give it one and set its value to false. The result of your map should be stored in a const named normalizedUsers.
+         const newUser = {
+            id: user.id,
+            email: user.email,
+            password: user.password,
+            createdAt: user.createdAt,
+            isActive: getIsActive(user),
+         };
+         return newUser;
+      })
+      .filter((normalizedUser) => {
+         //But we’re not done yet! Chain a filter method to your map method to return only the users where isActive is true. Rename normalizedUsers to currentUsers. currentUsers should contain only one object in the array.
+         return normalizedUser.isActive;
+      });
+
+   const currentUser = currentUsers;
 
    if (emailError !== "") {
       const element = "#sign-up-email";
@@ -386,6 +444,7 @@ $("#lets-go").click(function (e) {
       //Else hide any error messages/styling.
       console.log("The user is", user);
       console.log("The active user is", activeUser);
+      console.log("The current user is", currentUser);
    }
    //If password error is not "",
 });
@@ -503,6 +562,14 @@ function getEpochMs(value) {
    const epochMs = formattedDate.getTime();
 
    return epochMs;
+}
+
+function getIsActive(user) {
+   if (user.isActive === undefined) {
+      return false;
+   } else {
+      return user.isActive;
+   }
 }
 
 function removeSmAndMdImages(socialProfiles) {
